@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tearweb_api
+    restart: always
+    environment:
+      PORT: 3001
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      DESTINO_EMAIL: ${DESTINO_EMAIL}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-*}
+    ports:
+      - "3001:3001"
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: tearweb_web
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - api
