@@ -30,7 +30,8 @@ export default function Contato() {
     setCarregando(true);
 
     try {
-      const response = await fetch('/api/contato', {
+      const apiUrl = import.meta.env.PUBLIC_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/contato`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
