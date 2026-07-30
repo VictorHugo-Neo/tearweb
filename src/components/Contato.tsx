@@ -6,7 +6,9 @@ export default function Contato() {
     email: '',
     projeto: '',
   });
+  const [carregando, setCarregando] = useState(false);
   const [enviado, setEnviado] = useState(false);
+  const [erroMsg, setErroMsg] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -15,10 +17,40 @@ export default function Contato() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.nome && formData.email && formData.projeto) {
-      setEnviado(true);
+    setErroMsg('');
+    setEnviado(false);
+
+    if (!formData.nome || !formData.email || !formData.projeto) {
+      setErroMsg('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    setCarregando(true);
+
+    try {
+      const response = await fetch('/api/contato', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setEnviado(true);
+        setFormData({ nome: '', email: '', projeto: '' });
+      } else {
+        setErroMsg(result.error || 'Ocorreu um erro ao enviar o formulário.');
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      setErroMsg('Não foi possível conectar ao servidor. Tente novamente mais tarde.');
+    } finally {
+      setCarregando(false);
     }
   };
 
@@ -38,7 +70,13 @@ export default function Contato() {
           <form onSubmit={handleSubmit} className="md:col-span-3 bg-tear-white border border-tear-black/15 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 shadow-sm space-y-3.5 md:space-y-5">
             {enviado && (
               <div className="bg-tear-teal/15 border border-tear-teal text-tear-teal px-3 py-2 md:px-4 md:py-3 rounded-lg md:rounded-xl text-xs md:text-sm font-medium">
-                Mensagem enviada. Entraremos em contato em breve.
+                Mensagem enviada com sucesso! Entraremos em contato em breve.
+              </div>
+            )}
+
+            {erroMsg && (
+              <div className="bg-red-50 border border-red-400 text-red-700 px-3 py-2 md:px-4 md:py-3 rounded-lg md:rounded-xl text-xs md:text-sm font-medium">
+                {erroMsg}
               </div>
             )}
 
@@ -92,9 +130,10 @@ export default function Contato() {
 
             <button
               type="submit"
-              className="w-full sm:w-auto bg-tear-orange text-tear-white font-medium text-xs md:text-base px-6 py-2.5 md:px-8 md:py-3.5 rounded-lg md:rounded-xl shadow-md hover:scale-105 hover:shadow-lg active:scale-95 transition-all duration-300 cursor-pointer"
+              disabled={carregando}
+              className="w-full sm:w-auto bg-tear-orange text-tear-white font-medium text-xs md:text-base px-6 py-2.5 md:px-8 md:py-3.5 rounded-lg md:rounded-xl shadow-md hover:scale-105 hover:shadow-lg active:scale-95 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
-              Enviar Mensagem
+              {carregando ? 'Enviando...' : 'Enviar Mensagem'}
             </button>
           </form>
 

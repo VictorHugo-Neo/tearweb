@@ -54,7 +54,6 @@ export default function Portfolio() {
           </p>
         </div>
 
-        {/* Seleção por Abas no Mobile */}
         <div className="flex md:hidden gap-1.5 mb-4 overflow-x-auto pb-2 scrollbar-none">
           {projetos.map((projeto, index) => (
             <button
@@ -71,7 +70,6 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* Grid no Desktop / Card Ativo no Mobile */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
           {projetos.map((projeto, index) => (
             <div

@@ -62,7 +62,6 @@ export default function Servicos() {
           </p>
         </div>
 
-        {/* Seleção por Abas no Mobile */}
         <div className="flex md:hidden gap-1.5 mb-4 overflow-x-auto pb-2 scrollbar-none">
           {servicos.map((item, index) => (
             <button
@@ -79,7 +78,6 @@ export default function Servicos() {
           ))}
         </div>
 
-        {/* Grid no Desktop / Card Ativo no Mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {servicos.map((item, index) => (
             <div

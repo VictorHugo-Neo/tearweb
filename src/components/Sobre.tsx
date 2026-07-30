@@ -50,7 +50,6 @@ export default function Sobre() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-          {/* Lado Esquerdo: História / Manifesto */}
           <div className="space-y-4 text-xs sm:text-sm md:text-base text-tear-black/85 leading-relaxed">
             <p>
               Nascemos resolvendo problemas reais de comércios e empresas da região.
@@ -65,7 +64,6 @@ export default function Sobre() {
             </div>
           </div>
 
-          {/* Lado Direito: 3 Cards Minimalistas com os Pilares */}
           <div className="space-y-3 md:space-y-4">
             {pilares.map((pilar, index) => (
               <div

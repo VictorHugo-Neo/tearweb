@@ -51,12 +51,10 @@ export default function Cabecalho() {
   return (
     <header className="sticky top-0 z-50 bg-tear-white/95 backdrop-blur-md border-b border-tear-black/10 py-2.5 px-4 md:py-4 md:px-16 lg:px-24">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
+        {/* Boy tem que adicionar a logo aqui no formato svg */}
         <a href="#" className="text-lg md:text-xl font-bold text-tear-black tracking-tight flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-tear-teal inline-block"></span>
           TearWeb
         </a>
-
-        {/* Links Desktop */}
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link, index) => {
             const ehAtivo = secaoAtiva === link.id;
@@ -82,7 +80,6 @@ export default function Cabecalho() {
           </a>
         </nav>
 
-        {/* Botão Menu Mobile */}
         <button
           onClick={() => setMenuAberto(!menuAberto)}
           className="md:hidden text-tear-black p-1 focus:outline-none"
@@ -98,7 +95,6 @@ export default function Cabecalho() {
         </button>
       </div>
 
-      {/* Menu Mobile */}
       {menuAberto && (
         <nav className="md:hidden pt-2 pb-2 border-t border-tear-black/10 mt-2 flex flex-col gap-2">
           {links.map((link, index) => {

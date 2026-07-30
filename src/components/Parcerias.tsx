@@ -92,7 +92,7 @@ export default function Parcerias() {
           </div>
 
           <a
-            href="https://wa.me/"
+            href="https://wa.me/+5533998453545"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center bg-tear-orange text-tear-white font-medium text-xs md:text-base px-6 py-3 md:px-8 md:py-3.5 rounded-lg md:rounded-xl shadow-md hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer whitespace-nowrap"
