@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tear-teal: #397367;
+  --color-tear-white: #FFFFFF;
+  --color-tear-blue: #1098F7;
+  --color-tear-black: #000500;
+  --color-tear-orange: #F18F01;
+}

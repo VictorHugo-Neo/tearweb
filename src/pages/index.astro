@@ -1,0 +1,35 @@
+---
+import Cabecalho from '../components/Cabecalho';
+import Hero from '../components/Hero';
+import Sobre from '../components/Sobre';
+import Servicos from '../components/Servicos';
+import Portfolio from '../components/Portfolio';
+import Equipe from '../components/Equipe';
+import Parcerias from '../components/Parcerias';
+import Contato from '../components/Contato';
+import Rodape from '../components/Rodape';
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TearWeb</title>
+  </head>
+  <body class="bg-tear-white text-tear-black font-sans antialiased">
+    <Cabecalho client:load />
+    <Hero client:load />
+    <Sobre client:load />
+    <Servicos client:load />
+    <Portfolio client:load />
+    <Equipe client:load />
+    <Parcerias client:load />
+    <Contato client:load />
+    <Rodape client:load />
+  </body>
+</html>
+
+
+
