@@ -5,20 +5,6 @@ networks:
     external: true
 
 services:
-  caddy:
-    image: caddy:2-alpine
-    container_name: caddy_proxy
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-    networks:
-      - caddy_global_net
-
   db:
     image: postgres:16-alpine
     container_name: tearweb_db
@@ -61,6 +47,5 @@ services:
       - caddy_global_net
 
 volumes:
-  caddy_data:
-  caddy_config:
   postgres_data:
+
