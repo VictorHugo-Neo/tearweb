@@ -1,0 +1,11 @@
+:80 {
+    # chamadas da API para o container backend (api)
+    handle /api/* {
+        reverse_proxy api:3001
+    }
+
+    # Redireciona o restante para o container frontend (web)
+    handle {
+        reverse_proxy web:80
+    }
+}

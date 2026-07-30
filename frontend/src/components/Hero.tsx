@@ -3,7 +3,6 @@ import React from 'react';
 export default function Hero() {
   return (
     <section className="relative py-8 px-4 md:min-h-[85vh] md:py-16 md:px-16 lg:px-24 bg-gradient-to-br from-tear-white via-tear-white to-tear-teal/15 text-tear-black flex flex-col justify-center items-start overflow-hidden">
-      {/* Elementos visuais de fundo */}
       <div className="absolute top-1/4 right-10 w-48 h-48 md:w-72 md:h-72 bg-tear-teal/10 rounded-full blur-3xl pointer-events-none transition-all duration-700"></div>
       <div className="absolute bottom-10 left-1/3 w-64 h-64 md:w-96 md:h-96 bg-tear-blue/5 rounded-full blur-3xl pointer-events-none transition-all duration-700"></div>
 

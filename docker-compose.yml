@@ -1,6 +1,37 @@
 version: '3.8'
 
+networks:
+  caddy_global_net:
+    external: true
+
 services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - caddy_global_net
+
+  db:
+    image: postgres:16-alpine
+    container_name: tearweb_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-tearweb_db}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_secret_123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - caddy_global_net
+
   api:
     build:
       context: ./backend
@@ -12,8 +43,11 @@ services:
       RESEND_API_KEY: ${RESEND_API_KEY}
       DESTINO_EMAIL: ${DESTINO_EMAIL}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-*}
-    ports:
-      - "3001:3001"
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres_secret_123}@db:5432/${POSTGRES_DB:-tearweb_db}
+    depends_on:
+      - db
+    networks:
+      - caddy_global_net
 
   web:
     build:
@@ -21,7 +55,12 @@ services:
       dockerfile: Dockerfile
     container_name: tearweb_web
     restart: always
-    ports:
-      - "8080:80"
     depends_on:
       - api
+    networks:
+      - caddy_global_net
+
+volumes:
+  caddy_data:
+  caddy_config:
+  postgres_data:
